@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            background-color: #24252A;
+            /* background-image: url('black.webp'); */
+            
+        }
+        li,a,button{
+
+            font-family: "Montserret",sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            color: #edf0f1;
+            text-decoration: none;
+        }
+
+        header{
+            display:flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding:30px 10% 5px 10%;
+        }
+
+        .logo{
+            cursor: pointer;
+            margin-right: auto;
+            /* order: 3; */
+            margin-left: 60px;
+            width: 150px;
+            height: 80px;
+
+        }
+        .nav__links {
+
+            list-style: none;
+        }
+        .nav__links li {
+            display: inline-block;
+            padding: 0px 20px;
+        }
+        .nav__links li a{
+            transition: all 0.3s ease 0s;
+            
+        }
+        .nav__links li a:hover{
+            color: #19a714;
+        }
+        button{
+            padding: 9px 25px ;
+            background-color: rgba(0 ,136,169,1);
+            border:none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition:all 0.3s ease 0s ;
+            margin-left: 20px;
+
+        }
+        button:hover{
+            background-color: rgba(0 ,136,169,0.8);
+
+        }
+
+        h1{
+            font-size: 50px;
+            color: #19a714;
+            display: inline;
+            float: left;
+        }
+
+        h3{
+            font-size: 30px;
+            color:aliceblue;
+        }
+
+        h5{
+            font-size: 50px;
+            color:aliceblue;
+            display: inline;
+            float: left;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        .box{
+            margin-left: 100px;
+            margin-top: 80px;
+            position: relative;
+            
+        }
+        .para{
+            display: inline;
+            float: left;
+            width: 600px;
+            color: rgb(179, 183, 185);
+            padding: 20px 10px;
+            position: relative;
+            margin-right: 500px;
+            margin-left: 95px;
+            
+            
+        }
+        #upbtn{
+            position: relative;
+            margin-right: 600px;
+            margin-left: 110px;
+            margin-top: 20px;
+            display: inline;
+        }
+
+        /* .img1{
+            width: 200px;
+            margin-left: 800px;
+             margin-bottom: 900px; 
+            margin-top: 0px;
+            position: relative;
+        } */
+        #img2{
+            width: 500px;
+            margin-left: 800px;
+            position: relative;
+            box-sizing: border-box;
+            bottom: 200px;
+            /* margin-top: 100px; */
+            
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <header>
+        <img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPs9hYCKVJRDilQo3S9R0tt-HGJz-Fshhc0Q&usqp=CAU" alt="encry" height="50px">
+        <nav>
+            <ul class="nav__links">
+                <li><a  class="ml-2" href="{{ url_for('login') }}">login</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">cipher</a></li>
+                <!-- <li><a href="#"></a>about</li> -->
+            </ul>
+        </nav>
+        <a class="cta" href="#"><Button>Contact</Button></a>
+    </header>
+    
+    <div class="box">
+        <h3>Convert your</h3>
+        <h1>Plain text </h1>
+        <h5>to</h5>
+        <h1>Cipher text</h1>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="para">
+    <p>Forward your secret messages using cipher text</p>
+    <p>Ciphertext is encrypted text transformed from plaintext using an encryption algorithm. Ciphertext can't be read until it has been converted into plaintext (decrypted) with a key. The decryption cipher is an algorithm that transforms the ciphertext back into plaintext.
+    </p>
+    </div>
+    <a  class="ml-2" href="{{ url_for('register') }}"><button id="upbtn">Sign Up</button></a>
+    
+
+    <div class="img1">
+        <img id="img2" src="https://t4.ftcdn.net/jpg/02/07/45/97/360_F_207459754_XZ4VRclGSmux91GZ0ukm4oOPcF8wkN08.jpg">
+    </div>
+
+    
+</body>
+</html>

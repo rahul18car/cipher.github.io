@@ -1,0 +1,167 @@
+<html>
+    <head>
+ <style>
+  body {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #FFF 75%, #FFF8F8 100%);
+    font-family: var(--font);
+    background-image: url(https://www.kirupa.com/images/circles_bottom.svg);
+    background-repeat: no-repeat;
+    background-position: calc(100% + 150px) calc(100% + 50px);
+    background-size: 450px;
+    padding: 20px;
+  }
+        TEXTAREA{
+                border: 2px, solid, black;
+                width: 600px;
+                height: 150px;
+                border-width: 2px;
+                border-color: blueviolet;
+                text-align: center;
+                margin-left: 100px;
+                font-size: larger;
+                font-weight: 1000px;
+                font-family: cursive;
+        }
+        .plain{
+            margin-left: 250px;
+        }
+        h2{
+            text-align: center;
+        }
+        .key{
+            margin-left: 250px;
+        }
+        /*body{
+            background-color: burlywood;
+        }*/
+
+        .headline{
+             font-size: large;
+            font-weight: 500px;
+            font-family:'Times New Roman', Times, serif;
+        }
+
+        .ceaser-cipher{
+
+        position: relative;
+        bottom: 550px;
+        /*width: 100px;*/
+        margin-right:20px;
+        float: right;
+        margin-right: 4px;
+}
+        .play-fair{
+
+        position: relative;
+        bottom: 550px;
+        /*width: 100px;*/
+        margin-right:20px;
+        float: right;
+        margin-right: 3px;
+
+  }
+        
+        .registerbtn{
+
+        padding: 10px;
+        padding-right: 10px;
+        background-color: blueviolet;
+        background: linear-gradient(180deg, #FFF 75%, #FFF8F8 100%);
+        font-size: 18px;
+         border-radius: 20px;
+         text-decoration: none;
+
+
+    }
+
+  .registerbtn :hover{
+
+    background-color: #F6DDCC ;
+   
+
+
+  }
+
+        
+</style>
+    </head>
+<body>
+<h2 >Rail Fence Cipher </h2>
+
+<p class="headline">Enter the word that you want to ENCRYPT, then put "NUMBER" in a key form to make how many rail you need</p>
+
+ <div class="plain">
+    <b>Plaintext</b>
+    <div>
+ <BR> 
+<TEXTAREA id="p" name="p" rows="4" cols="50" class="text">attack at dawn</TEXTAREA>
+
+<div class="key">
+
+<P >
+    &emsp;&emsp;<b>line</b> &nbsp;<b>=</b>&nbsp; <INPUT id="key" name="key" size="5" value=" " type="text">
+</P>
+
+<P>
+    <INPUT name="btnEn" value="v Encrypt v" onclick="Encrypt()" type="button" >&emsp;&emsp; 
+    <INPUT name="btnDe" value="^ Decrypt ^" onclick="Decrypt()" type="button">
+</P>
+
+</div>
+
+<P><b>Ciphertext</b>
+    
+<BR><TEXTAREA id="c" name="c" rows="4" cols="50"></TEXTAREA> </P> 
+
+
+<script>
+function Encrypt() {
+        plaintext = document.getElementById("p").value.toLowerCase().replace(/[^a-z]/g, "");  
+        if(plaintext.length < 1){ alert("please enter some plaintext"); return; }    
+        var key = parseInt(document.getElementById("key").value);
+        if(key > Math.floor(2*(plaintext.length-1))){ alert("key is too large for the plaintext length."); return; }  
+        ciphertext = "";
+        for(line=0; line<key-1; line++){
+           skip=2*(key-line-1);   j=0;
+            for(i=line; i<plaintext.length;){
+                ciphertext += plaintext.charAt(i);
+                if((line==0) || (j%2 == 0)) i+=skip;
+               else i+=2*(key-1) - skip;  
+               j++;          
+            }
+        }
+        for(i=line; i<plaintext.length; i+=2*(key-1)) ciphertext += plaintext.charAt(i);
+        document.getElementById("c").value = ciphertext;
+    }
+    
+    function Decrypt(f) {
+        ciphertext = document.getElementById("c").value.toLowerCase().replace(/[^a-z]/g, "");  
+        if(ciphertext.length < 1){ alert("please enter some ciphertext (letters only)"); return; }    
+        var key = parseInt(document.getElementById("key").value);
+        if(key > Math.floor(2*(ciphertext.length-1))){ alert("please enter 1 - 22."); return; }      
+        pt = new Array(ciphertext.length);   k=0;
+        for(line=0; line<key-1; line++){
+           skip=2*(key-line-1);  j=0;
+            for(i=line; i<ciphertext.length;){
+                pt[i] = ciphertext.charAt(k++);
+                if((line==0) || (j%2 == 0)) i+=skip;
+               else i+=2*(key-1) - skip;  
+               j++;        
+            }
+        }
+        for(i=line; i<ciphertext.length; i+=2*(key-1)) pt[i] = ciphertext.charAt(k++);
+        document.getElementById("p").value = pt.join("");
+    }
+
+</script>
+
+<div class="Ceaser-cipher">
+    <button type="submit" class="registerbtn"><a style="text-decoration: none;" class="ml-2" href="{{ url_for('ceaser') }}">Ceaser-cipher</a></button>
+    </div>
+<div class="play-fair">
+    <button type="submit" class="registerbtn"><a style="text-decoration: none;" class="ml-2" href="{{ url_for('fair') }}">Play-Fair</a></button>
+    </div>
+
+</body>
+</html>

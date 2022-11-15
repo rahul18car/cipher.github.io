@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+    html {
+    --primary: #FF6666;
+    --font: 'Andale Mono', 'Menlo', 'Courier New', Courier, monospace;
+    --dark: #222;
+    --gray: #D8D8D8;
+    --white: #FFF;
+    --darkGray: #A2A2A2;
+  }
+  
+  body {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #FFF 75%, #FFF8F8 100%);
+    font-family: var(--font);
+    background-image: url(https://www.kirupa.com/images/circles_bottom.svg);
+    background-repeat: no-repeat;
+    background-position: calc(100% + 150px) calc(100% + 50px);
+    background-size: 450px;
+    padding: 20px;
+  }
+  
+  h1 {
+    color: var(--primary);
+    border-bottom: 5px solid var(--primary);
+    padding: 20px;
+    margin-top: 0px;
+    font-size: 3em;
+    font-weight: 100;
+  }
+  
+  label {
+    margin: 20px;
+    color: var(--darkGray);
+  }
+  
+  input {
+    display: block;
+    font-family: var(--font);
+    font-size: 2em;
+    padding: 10px;
+    font-weight: 100;
+    border: 3px solid var(--gray);
+    margin: 20px;
+    background-color: var(--white);
+    width: calc(100% - 65px);
+  }
+  
+  #encrypted {
+    border-color: var(--dark);
+    background-color: var(--dark);
+    color: var(--white);
+  }
+  
+  .mainContainer {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  hr {
+    border: 1px solid var(--primary);
+    margin: 50px 0px;
+  }
+  
+  .orange img {
+    width: 50px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 50px;
+  }
+  .rail-fence{
+
+        position: relative;
+        bottom: 600px;
+        /*width: 100px;*/
+        float: right;
+  }
+
+.play-fair{
+
+        position: relative;
+        bottom: 600px;
+        /*width: 100px;*/
+        float: right;
+        margin-right: 4px;
+  }
+  .registerbtn{
+
+        padding: 10px;
+        padding-right: 10px;
+        background-color: blueviolet;
+        background: linear-gradient(180deg, #FFF 75%, #FFF8F8 100%);
+        font-size: 18px;
+         text-decoration: none;
+         border-radius: 20px;
+        
+
+    }
+
+  .registerbtn :hover{
+
+    background-color: #F6DDCC ;
+   
+
+
+  }
+
+
+</style>
+
+</head>
+<body>
+
+    <div class="mainContainer">
+
+        <h1>Ceaser's Cipher</h1>
+
+        <label for="original">Original Message</label>
+        <input id="original" type="text" value="pizza">
+
+        <label for="shift">Shift</label>
+        <input id="shift" type="number" value="2" placeholder="0">
+
+        <hr>
+
+        <label for="encrypted">Encrypted Message</label>
+        <input id="encrypted" type="text" value="" readonly>
+        
+
+    </div>
+
+    <script>
+
+        let originalInput = document.querySelector("#original");
+        let shiftInput = document.querySelector("#shift");
+        let encryptedInput = document.querySelector("#encrypted")
+
+
+
+        let originalMessage = originalInput.value;
+
+        originalInput.addEventListener("input", CharacterEntered, false);
+        shiftInput.addEventListener("input",numberEntered, false)
+
+        function CharacterEntered(e)
+        {
+            originalMessage = e.target.value;
+            originalMessage = originalMessage.toLowerCase();
+            originalMessage = originalMessage.replace(/[^a-z]/, '');
+
+            e.target.value = originalMessage;
+
+            startEncryption();
+        }
+
+        function numberEntered(e){
+
+            startEncryption();
+        }
+
+
+        function startEncryption()
+        {
+            let encryptedMessage = ""
+            let shift = shiftInput.value ? Number(shiftInput.value) : 0;
+
+            for (letter of originalMessage){
+
+                encryptedMessage += shiftLetter(letter, shift);
+            }
+
+            encryptedInput.value = encryptedMessage;
+        }
+        startEncryption();
+
+        function shiftLetter(letter, shift){
+
+            let newLettter = "";
+
+            let letterCode = letter.charCodeAt(0);
+            let newLettterCode = letterCode + (shift%26);
+
+            if (newLettterCode < 97){
+                newLettterCode += 26;
+            }
+            else if (newLettterCode > 122){
+                newLettterCode -= 26;
+            }            
+
+            newLettter = String.fromCharCode(newLettterCode);
+
+            return newLettter;
+        }
+                
+    </script>
+
+    <div class="rail-fence">
+    <button type="submit" class="registerbtn"><a style="text-decoration: none;" class="ml-2" href="{{ url_for('rail') }}">Rail-Fence</a></button>
+    </div>&emsp;&emsp;
+
+    <div class="play-fair">
+    <button type="submit" class="registerbtn"><a style="text-decoration: none;" class="ml-2" href="{{ url_for('fair') }}">Play-Fair</a></button>
+    </div>
+
+
+</body>
+</html>
